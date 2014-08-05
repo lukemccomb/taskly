@@ -84,3 +84,16 @@ main {
     font-size: 110%;
   }
 }
+
+#created {
+  width: 100%;
+  background-color: rgba(0, 223, 0, 0.5);
+  border: 1px solid darkgreen;
+  height: 10px;
+  padding: 15px;
+}
+
+#error {
+  color: maroon;
+  font-size: 150%;
+}
