@@ -1,0 +1,10 @@
+<h1>Edit a Task List</h1>
+
+<%= form_for @task_list, method: :put do |f| %>
+  <% if @task_list.errors[:name].any? %>
+    <p class="error"><%= @task_list.errors[:name].first %></p>
+  <% end %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit "Update Task List" %>
+<% end %>

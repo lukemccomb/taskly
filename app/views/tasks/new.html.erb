@@ -1,0 +1,12 @@
+<h1>Add a task</h1>
+
+
+<%= form_for @task, url: "/task_lists/#{params[:task_list_id]}/tasks", method: :post do |f| %>
+  <% if @task.errors[:name].any? %>
+    <p class="error"><%= @task.errors[:name].first %></p>
+  <% end %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.date_select :date %>
+  <%= f.submit "Create Task" %>
+<% end %>
