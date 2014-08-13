@@ -32,7 +32,11 @@ class TaskListsController < ApplicationController
     else
       render :edit
     end
+  end
 
+  def show
+    @task_list = TaskList.find(params[:id])
+    @tasks = Task.find_by(task_list_id: @task_list.id)
   end
 
 end

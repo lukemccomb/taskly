@@ -54,7 +54,15 @@ feature 'Task lists' do
     click_on "Create Task"
     expect(page).to have_content("Task was created successfully!")
     expect(page).to have_content("Random task") # add due date expectation
+  end
 
+  scenario 'User can view individual tasks list pages with related tasks' do
+    first('.task-list').click_on("+ Add Task")
+    fill_in "Name", with: "Random task"
+    click_on "Create Task"
+    click_on "Household Chores"
+    expect(page).to have_content("Random task")
+    expect(page).to_not have_content("Work List")
   end
 
 end

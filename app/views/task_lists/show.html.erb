@@ -1,0 +1,8 @@
+<h1><%= @task_list.name %></h1>
+
+
+  <section class="task">
+    <% @task_list.tasks.each do |task| %>
+      <p class="task"><%= task.name %><%= button_to 'Delete', {:controller => :tasks, action: 'destroy', id: task.id, task_list_id: @task_list.id }, method: :delete %></p>
+    <% end %>
+  </section>
