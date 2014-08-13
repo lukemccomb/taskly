@@ -101,11 +101,31 @@ main {
 .task {
   border: 1px solid grey;
   padding: 1%;
-  width: 70%;
+  width: 80%;
   background-color: whitesmoke;
 }
 
-.delete {
+.button_to {
+  display: inline;
   float: right;
+}
+
+a {
+  text-decoration: none;
+}
+
+.task_title {
+  font-style: italic;
+}
+
+.edit_link {
+  font-weight: 200;
+}
+
+.add_link {
+  font-weight: 200;
+}
+
+.header {
   display: inline;
 }

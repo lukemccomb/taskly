@@ -50,10 +50,12 @@ feature 'Task lists' do
     first('.task-list').click_on("+ Add Task")
     expect(page).to have_content("Add a task")
     fill_in "Name", with: "Random task"
-    # fill in date
+    select '2014', :from => 'task_date_1i'
+    select 'August', :from => 'task_date_2i'
+    select '14', :from => 'task_date_3i'
     click_on "Create Task"
     expect(page).to have_content("Task was created successfully!")
-    expect(page).to have_content("Random task") # add due date expectation
+    expect(page).to have_content("Random task (1 day)")
   end
 
   scenario 'User can view individual tasks list pages with related tasks' do

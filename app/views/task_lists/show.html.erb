@@ -1,8 +1,5 @@
 <h1><%= @task_list.name %></h1>
 
-
-  <section class="task">
     <% @task_list.tasks.each do |task| %>
-      <p class="task"><%= task.name %><%= button_to 'Delete', {:controller => :tasks, action: 'destroy', id: task.id, task_list_id: @task_list.id }, method: :delete %></p>
+      <div class="task"><%= task.name %>  (<%= distance_of_time_in_words(task.date, Date.current) %>)<%= button_to 'Delete', {:controller => :tasks, action: 'destroy', id: task.id, task_list_id: @task_list.id }, method: :delete %></div>
     <% end %>
-  </section>
