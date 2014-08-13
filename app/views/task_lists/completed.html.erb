@@ -1,0 +1,10 @@
+<h1><%= @task_list.name %> - Completed Tasks</h1>
+
+<% @task_list.tasks.each do |task| %>
+  <% if task.complete %>
+    <br><div class="task">
+      <%= task.name %>  (<%= distance_of_time_in_words(task.date, Date.current) %>)
+      <%= button_to 'Delete', {:controller => :tasks, action: 'destroy', id: task.id, task_list_id: @task_list.id }, method: :delete %>
+    </div><br>
+  <% end %>
+<% end %>
