@@ -16,3 +16,7 @@ group :development, :test do
   gem 'rspec-collection_matchers', '~> 1.0.0'
   gem "capybara", "2.3.0"
 end
+
+group :production do
+  gem 'rails_12factor', '~> 0.0.2'
+end

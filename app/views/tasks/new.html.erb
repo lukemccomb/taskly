@@ -1,7 +1,7 @@
 <h1>Add a task</h1>
 
 
-<%= form_for @task, url: "/task_lists/#{params[:task_list_id]}/tasks", method: :post do |f| %>
+<%= form_for @task, url: "/task_lists/#{@task_list.id}/tasks", method: :post do |f| %>
   <% if @task.errors[:name].any? %>
     <p class="error"><%= @task.errors[:name].first %></p>
   <% end %>

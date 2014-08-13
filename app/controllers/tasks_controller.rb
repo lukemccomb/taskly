@@ -5,15 +5,15 @@ class TasksController < ApplicationController
   end
 
   def new
+    @task_list = TaskList.find(params[:task_list_id])
     @task = Task.new
-    render :new
   end
 
   def create
-    @task = Task.new(name: "#{params[:task][:name]}", task_lists_id: "#{params[:task][:task_list_id]}", date: params[:task][:date])
-    p "8"*20
-    p params
-    p "8"*20
+    @task_list = TaskList.find(params[:task_list_id])
+    @task = Task.new(allowed_parameters)
+    @task.task_list_id = params[:task_list_id]
+
     if @task.save
       flash[:notice] = "Task was created successfully!"
       redirect_to root_path
@@ -24,7 +24,6 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
-    render :edit
   end
 
   def update
@@ -36,6 +35,24 @@ class TasksController < ApplicationController
       render :edit
     end
 
+  end
+
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    flash[:notice] = "Task was deleted successfully!"
+    redirect_to root_path
+  end
+
+  def show
+    @task_list = TaskList.find(params[:task_list_id])
+
+  end
+
+  private
+
+  def allowed_parameters
+    params.require(:task).permit(:name, :date)
   end
 
 end
