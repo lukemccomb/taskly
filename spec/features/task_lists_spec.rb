@@ -85,4 +85,22 @@ feature 'Task lists' do
     expect(page).to have_content("Random task (1 day)")
   end
 
+  scenario "tasks appear in chronological order" do
+    first('.task-list').click_on("+ Add Task")
+    expect(page).to have_content("Add a task")
+    fill_in "Name", with: "Random task"
+    select '2014', :from => 'task_date_1i'
+    select 'August', :from => 'task_date_2i'
+    select '14', :from => 'task_date_3i'
+    click_on "Create Task"
+    first('.task-list').click_on("+ Add Task")
+    expect(page).to have_content("Add a task")
+    fill_in "Name", with: "Random task"
+    select '2014', :from => 'task_date_1i'
+    select 'August', :from => 'task_date_2i'
+    select '15', :from => 'task_date_3i'
+    click_on "Create Task"
+    expect(page).to have_content("Random task (1 day) Random task (2 days)")
+  end
+
 end
