@@ -2,7 +2,7 @@
 <%= link_to 'Completed', "/task_lists/#{@task_list.id}/completed", class: :add_link %> ∞
 <%= link_to '+ Add Task', new_task_list_task_path(@task_list), class: :add_link %><br>
 
-<% @task_list.tasks.each do |task| %>
+<% @task_list.tasks.order(:date).each do |task| %>
   <% unless task.complete %>
     <br><div class="task">
       <%= task.name %>  (<%= distance_of_time_in_words(task.date, Date.current) %>)

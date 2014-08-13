@@ -86,7 +86,7 @@ main {
 }
 
 #created {
-  width: 100%;
+  width: 90%;
   background-color: rgba(0, 223, 0, 0.5);
   border: 1px solid darkgreen;
   height: 10px;
@@ -112,6 +112,14 @@ main {
 
 a {
   text-decoration: none;
+}
+
+a:visited {
+  color: orangered;
+}
+
+a:hover {
+  color: green;
 }
 
 .task_title {
