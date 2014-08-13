@@ -103,4 +103,9 @@ feature 'Task lists' do
     expect(page).to have_content("Random task (1 day) Random task (2 days)")
   end
 
+  scenario "user can delete a task list and related tasks are deleted" do
+    first('.task-list').click_on("Delete")
+    expect(page).to_not have_content("Household Chores")
+  end
+
 end
