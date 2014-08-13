@@ -87,14 +87,12 @@ feature 'Task lists' do
 
   scenario "tasks appear in chronological order" do
     first('.task-list').click_on("+ Add Task")
-    expect(page).to have_content("Add a task")
     fill_in "Name", with: "Random task"
     select '2014', :from => 'task_date_1i'
     select 'August', :from => 'task_date_2i'
     select '14', :from => 'task_date_3i'
     click_on "Create Task"
     first('.task-list').click_on("+ Add Task")
-    expect(page).to have_content("Add a task")
     fill_in "Name", with: "Random task"
     select '2014', :from => 'task_date_1i'
     select 'August', :from => 'task_date_2i'
@@ -106,6 +104,10 @@ feature 'Task lists' do
   scenario "user can delete a task list and related tasks are deleted" do
     first('.task-list').click_on("Delete")
     expect(page).to_not have_content("Household Chores")
+  end
+
+  scenario "task lists with no tasks show friendly message" do
+    expect(page).to have_content("Nothing to see here!")
   end
 
 end
