@@ -13,6 +13,5 @@ Rails.application.routes.draw do
     resources :tasks
   end
 
-
-
+  get "/task_lists/:task_list_id/completed" => "task_lists#completed"
 end

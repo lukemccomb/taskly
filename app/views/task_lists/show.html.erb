@@ -1,5 +1,13 @@
 <h1><%= @task_list.name %></h1>
+<%= link_to 'Completed', "/task_lists/#{@task_list.id}/completed", class: :add_link %> ∞
+<%= link_to '+ Add Task', new_task_list_task_path(@task_list), class: :add_link %><br>
 
-    <% @task_list.tasks.each do |task| %>
-      <div class="task"><%= task.name %>  (<%= distance_of_time_in_words(task.date, Date.current) %>)<%= button_to 'Delete', {:controller => :tasks, action: 'destroy', id: task.id, task_list_id: @task_list.id }, method: :delete %></div>
-    <% end %>
+<% @task_list.tasks.each do |task| %>
+  <% unless task.complete %>
+    <br><div class="task">
+      <%= task.name %>  (<%= distance_of_time_in_words(task.date, Date.current) %>)
+      <%= button_to 'Complete', {:controller => :tasks, action: 'update', id: task.id, task_list_id: @task_list.id }, method: :put %> ∞
+      <%= button_to 'Delete', {:controller => :tasks, action: 'destroy', id: task.id, task_list_id: @task_list.id }, method: :delete %>
+    </div><br>
+  <% end %>
+<% end %>

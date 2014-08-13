@@ -67,4 +67,22 @@ feature 'Task lists' do
     expect(page).to_not have_content("Work List")
   end
 
+  scenario "User can complete tasks and view completed tasks" do
+    first('.task-list').click_on("+ Add Task")
+    expect(page).to have_content("Add a task")
+    fill_in "Name", with: "Random task"
+    select '2014', :from => 'task_date_1i'
+    select 'August', :from => 'task_date_2i'
+    select '14', :from => 'task_date_3i'
+    click_on "Create Task"
+    expect(page).to have_content("Task was created successfully!")
+    expect(page).to have_content("Random task (1 day)")
+    first('.task').click_on("Complete")
+    expect(page).to have_content("Task was completed")
+    expect(page).to_not have_content("Random Task")
+    first('.task-list').click_on("Completed")
+    expect(page).to have_content("Completed Tasks")
+    expect(page).to have_content("Random task (1 day)")
+  end
+
 end

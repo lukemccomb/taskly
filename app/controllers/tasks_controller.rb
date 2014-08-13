@@ -28,13 +28,9 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    if @task.update(name: "#{params[:task_list][:name]}")
-      flash[:notice] = "Task was updated successfully!"
-      redirect_to root_path
-    else
-      render :edit
-    end
-
+    @task.update_attributes(complete: true)
+    flash[:notice] = "Task was completed"
+    redirect_to :back
   end
 
   def destroy
@@ -46,7 +42,6 @@ class TasksController < ApplicationController
 
   def show
     @task_list = TaskList.find(params[:task_list_id])
-
   end
 
   private

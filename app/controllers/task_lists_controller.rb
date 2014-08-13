@@ -39,4 +39,10 @@ class TaskListsController < ApplicationController
     @tasks = Task.find_by(task_list_id: @task_list.id)
   end
 
+  def completed
+    @task_list = TaskList.find(params[:task_list_id])
+    @tasks = Task.find_by(task_list_id: @task_list.id)
+    render :completed
+  end
+
 end
