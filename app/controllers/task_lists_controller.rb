@@ -2,6 +2,7 @@ class TaskListsController < ApplicationController
 
   def index
     @task_lists = TaskList.order(:name)
+    @users = User.all
   end
 
   def new

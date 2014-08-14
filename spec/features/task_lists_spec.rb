@@ -4,6 +4,7 @@ require 'capybara/rails'
 feature 'Task lists' do
   before (:each) do
     create_user email: "user@example.com"
+    create_user email: "luke@example.com", name: "Luke"
     TaskList.create!(name: "Work List")
     TaskList.create!(name: "Household Chores")
     visit signin_path
@@ -52,18 +53,20 @@ feature 'Task lists' do
     fill_in "Name", with: "Random task"
     select '2014', :from => 'task_date_1i'
     select 'August', :from => 'task_date_2i'
-    select '14', :from => 'task_date_3i'
+    select '15', :from => 'task_date_3i'
+    select 'Luke', :from => "task[user_id]"
     click_on "Create Task"
     expect(page).to have_content("Task was created successfully!")
-    expect(page).to have_content("Random task (1 day)")
+    expect(page).to have_content("Random task (1 day) - Luke")
   end
 
   scenario 'User can view individual tasks list pages with related tasks' do
     first('.task-list').click_on("+ Add Task")
     fill_in "Name", with: "Random task"
+    select 'Luke', :from => "task[user_id]"
     click_on "Create Task"
     click_on "Household Chores"
-    expect(page).to have_content("Random task")
+    expect(page).to have_content("Random task (less than a minute)")
     expect(page).to_not have_content("Work List")
   end
 
@@ -73,10 +76,11 @@ feature 'Task lists' do
     fill_in "Name", with: "Random task"
     select '2014', :from => 'task_date_1i'
     select 'August', :from => 'task_date_2i'
-    select '14', :from => 'task_date_3i'
+    select '15', :from => 'task_date_3i'
+    select 'Luke', :from => "task[user_id]"
     click_on "Create Task"
     expect(page).to have_content("Task was created successfully!")
-    expect(page).to have_content("Random task (1 day)")
+    expect(page).to have_content("Random task (1 day) - Luke")
     first('.task').click_on("Complete")
     expect(page).to have_content("Task was completed")
     expect(page).to_not have_content("Random Task")
@@ -90,15 +94,17 @@ feature 'Task lists' do
     fill_in "Name", with: "Random task"
     select '2014', :from => 'task_date_1i'
     select 'August', :from => 'task_date_2i'
-    select '14', :from => 'task_date_3i'
+    select '15', :from => 'task_date_3i'
+    select 'Luke', :from => "task[user_id]"
     click_on "Create Task"
     first('.task-list').click_on("+ Add Task")
     fill_in "Name", with: "Random task"
     select '2014', :from => 'task_date_1i'
     select 'August', :from => 'task_date_2i'
-    select '15', :from => 'task_date_3i'
+    select '16', :from => 'task_date_3i'
+    select 'Luke', :from => "task[user_id]"
     click_on "Create Task"
-    expect(page).to have_content("Random task (1 day) Random task (2 days)")
+    expect(page).to have_content("Random task (1 day) - Luke Random task (2 days) - Luke")
   end
 
   scenario "user can delete a task list and related tasks are deleted" do
@@ -108,6 +114,18 @@ feature 'Task lists' do
 
   scenario "task lists with no tasks show friendly message" do
     expect(page).to have_content("Nothing to see here!")
+  end
+
+  scenario "User can assign other users to a task" do
+    first('.task-list').click_on("+ Add Task")
+    expect(page).to have_content("Add a task")
+    fill_in "Name", with: "Random task"
+    select '2014', :from => 'task_date_1i'
+    select 'August', :from => 'task_date_2i'
+    select '15', :from => 'task_date_3i'
+    select 'Luke', :from => "task[user_id]"
+    click_on "Create Task"
+    expect(page).to have_content("Random task (1 day) - Luke")
   end
 
 end

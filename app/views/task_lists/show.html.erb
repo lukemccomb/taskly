@@ -1,8 +1,8 @@
 <h1><%= @task_list.name %></h1>
+<%= link_to '+ Add Task', new_task_list_task_path(@task_list), class: :add_link %> ∞
 <%= link_to 'Edit', edit_task_list_path(@task_list), class: :edit_link %> ∞
 <%= link_to 'Delete', "/task_lists/#{@task_list.id}", class: :edit_link, method: :delete %> ∞
 <%= link_to 'Completed', "/task_lists/#{@task_list.id}/completed", class: :add_link %> ∞
-<%= link_to '+ Add Task', new_task_list_task_path(@task_list), class: :add_link %><br>
 
 <% if @task_list.tasks.length > 0 %>
   <% @task_list.tasks.order(:date).each do |task| %>

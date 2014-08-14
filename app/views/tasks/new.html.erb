@@ -8,5 +8,7 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.date_select :date %>
+  <%= f.select(:user_id, User.all.collect {|p| [ p.name, p.id ] }, {prompt: 'Select user'}) %>
   <%= f.submit "Create Task" %>
 <% end %>
+

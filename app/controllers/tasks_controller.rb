@@ -13,6 +13,7 @@ class TasksController < ApplicationController
     @task_list = TaskList.find(params[:task_list_id])
     @task = Task.new(allowed_parameters)
     @task.task_list_id = params[:task_list_id]
+    @task.user_id = params[:task][:user_id]
 
     if @task.save
       flash[:notice] = "Task was created successfully!"
@@ -42,6 +43,7 @@ class TasksController < ApplicationController
 
   def show
     @task_list = TaskList.find(params[:task_list_id])
+    @users = User.all
   end
 
   private
