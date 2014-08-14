@@ -4,6 +4,7 @@
 
   <section class="task-list">
     <h1>
+      <%= image_tag "arrow.png", class: :arrow %>
       <%= link_to task_list.name, task_list_path(task_list), class: :task_title %> ∞
       <%= link_to '+ Add Task', new_task_list_task_path(task_list), class: :add_link %> ∞
       <%= link_to 'Edit', edit_task_list_path(task_list), class: :edit_link %> ∞
